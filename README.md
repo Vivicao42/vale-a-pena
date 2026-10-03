@@ -1,35 +1,3 @@
-Onde eu parei:
-
-2_buscar_videos.py tá funcionando, mas deu erro list indices must be integers or slices, not str
-
-Provavelmente é confusão entre devolver dicionário ou lista na buscar_video
-
-Próximo passo: rodar print(type(resultado)) pra descobrir o que é
-
-O que ainda falta no Tijolo 2:
-
-✅ Decidir o return da buscar_video (dicionário ou lista)
-
-✅✅✅✅✅✅✅✅
-
-Testar termos diferentes pra ver quantos resultados voltam
-
-Loop em várias palavras-chave
-
-Deduplicar
-
-Salvar os IDs num arquivo
-
-Projeto: Vale a pena? - Pipeline de reviews de maquiagem
-Pipeline de dados que unifica reviews de maquiagem de diversas fontes para ajudar as consumidoras a decidir se um produto vale a pena comprar.
-
-Coletar reviews de maquiagem dos comentarios dos videos do youtube.
-Este projeto surgiu da necessidade de unificar todos as avaliaçoes de produtos de maquiagem em um so lugar. Se eu quiser saber se a base hidra glow da niina secrets é boa, eu preciso acessar o tiktok, o instagram, o yt, sites de venda de maquiagem, etc. So nessa busca eu ja perdi a vontade de saber se aquele produto vale ou nao a pena comprar.
-
-Comecei criando uma funçao que faz downloads de comentarios de videos com ids especificas.
-
-
-
 # Vale a Pena? — Pipeline de reviews de maquiagem
 Pipeline de dados que unifica reviews de maquiagem de diversas fontes para ajudar as consumidoras a decidir se um produto vale a pena comprar.
 (descrição curta)
