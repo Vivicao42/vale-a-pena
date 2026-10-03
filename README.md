@@ -3,7 +3,7 @@ Pipeline de dados que unifica reviews de maquiagem de diversas fontes para ajuda
 (descrição curta)
 
 ## O problema
-(seu texto revisado)
+
 Este projeto surgiu da necessidade de unificar todos as avaliaçoes de produtos de maquiagem em um so lugar. Se eu quiser saber se a base hidra glow da niina secrets é boa, eu preciso acessar o tiktok, o instagram, o yt, sites de venda de maquiagem, etc. So nessa busca eu ja perdi a vontade de saber se aquele produto vale ou nao a pena comprar.
 ## Como funciona
 (5 passos do fluxo)
@@ -12,22 +12,17 @@ Este projeto surgiu da necessidade de unificar todos as avaliaçoes de produtos 
 (árvore de arquivos)
 \`\`\`
 vale-a-pena/
-├── coletor.py
-├── 2_buscar_videos.py
+├── 1_baixar.py
+├── 2_buscar_video.py
 ├── dados/
-│   ├── videos.txt
-│   └── raw/
-├── .env.example
+│   ├── id_videos.txt
+│   └── comentários.csv
+├── .env
 └── README.md
 \`\`\`
 
 ## Como rodar
-(ainda em construção — deixa placeholder)
-1. Clone o repositório
-2. Crie o arquivo `.env` a partir do `.env.example`
-3. Coloque sua chave da YouTube API no `.env`
-4. Instale as dependências: `pip install -r requirements.txt`
-5. Rode: `python 2_buscar_videos.py`
+
 
 ## Decisões técnicas
 - **YouTube API em vez de scraping:** APIs oficiais evitam
@@ -38,7 +33,7 @@ vale-a-pena/
   mais de um termo de busca.
 
 ## Status
-- [ ] Coleta de comentários
+- [x] Coleta de comentários
 - [x] Busca de vídeos
 - [ ] Limpeza
 - [ ] Sentimento
