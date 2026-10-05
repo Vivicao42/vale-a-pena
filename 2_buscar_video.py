@@ -31,10 +31,18 @@ def extrair_ids(dados) -> list:
     
     return lista_ids
 
+def salvar_json(dados: dict, caminho: str) -> None:
+    caminho = Path(caminho)
+    caminho.parent.mkdir(parents=True, exist_ok=True)
+    conteudo = json.dumps(dados, indent=2, ensure_ascii=False)
+    caminho.write_text(conteudo, encoding="utf-8")
+        
 def buscar_varios_termos(termos):
     todos_ids = []
     for termo in termos:
         dados = buscar_video(termo)
+        nome_arquivo = termo.replace("#", "").replace(" ", "_")
+        salvar_json(dados, f"dados/raw/busca_{termo}.json")
         ids = extrair_ids(dados)
         todos_ids.extend(ids)
     
@@ -50,7 +58,7 @@ def salvar_ids(ids: list, caminho: str) -> None:
 if __name__ == "__main__":
     TERMOS = ["base maquiagem", "resenha base", "#base"]
     ids_unicos = buscar_varios_termos(TERMOS)
-    
+  
     salvar_ids(ids_unicos, "dados/id_video.txt")
     print("Total de IDs:", len(ids_unicos))
     print("Salvei em dados/id_videos.txt")

@@ -1,13 +1,22 @@
-from dotenv import load_dotenv
 import os
+import json
+from pathlib import Path
+
 import requests
 import pandas as pd
-import json
+from dotenv import load_dotenv
+
 
 # 1. carrega a chave do .env
 load_dotenv()
 CHAVE = os.getenv("YOUTUBE_API_KEY")
 
+def salvar_json(dados: dict, caminho: str) -> None:
+    caminho = Path(caminho)
+    caminho.parent.mkdir(parents=True, exist_ok=True)
+    conteudo = json.dumps(dados, indent=2, ensure_ascii=False)
+    caminho.write_text(conteudo, encoding="utf-8")
+  
 
 def baixar_comentarios(id_video):
     # 3. monta a URL e os parâmetros
@@ -25,6 +34,9 @@ def baixar_comentarios(id_video):
     #print(json.dumps(dados, indent=2)[:2000]) 
     #"Pega o dicionário dados, transforma numa string JSON formatada com 2 espaços de recuo por nível, 
     # e imprime só os primeiros 2000 caracteres."
+    
+  
+    salvar_json(dados, f"dados/raw/comentarios_{id_video}.json")
 
     lista_comentarios = []
     for item in dados["items"]:
@@ -36,23 +48,7 @@ def baixar_comentarios(id_video):
             "data": snippet_comentario["publishedAt"],
         })
     return lista_comentarios
-   #REPITO A MESMA COISA NO EXEMPLO COMENTADO DE BAIXO 
-    
-#  passo 1: pega o valor de fora
-# texto_do_comentario = snippet_comentario["textDisplay"]
 
-# # passo 2: monta um dicionário com esse valor
-# comentario_individual = {
-#     "texto": texto_do_comentario,
-#     "autor": snippet_comentario["authorDisplayName"],
-# }
-
-# # passo 3: coloca o dicionário na lista
-# comentarios.append(comentario_individual)
-    
-    
-    # print("Total de comentários:", len(lista_comentarios))
-    # return lista_comentarios
 
 # ==== quando roda como script ====
 if __name__ == "__main__":
@@ -62,7 +58,3 @@ if __name__ == "__main__":
     tabela = pd.DataFrame(comentarios)
     tabela.to_csv("dados/comentarios.csv", index=False)
     print("Salvei", len(tabela), "comentários em dados/comentarios.csv")
-
-#tabela = pd.DataFrame(comentarios)
-#tabela.to_csv("dados/comentarios.csv", index=False)
-#print("Salvei", len(tabela), "comentários em dados/comentarios.csv")
