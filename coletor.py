@@ -44,7 +44,6 @@ def baixar_comentarios(id_video):
     
         lista_comentarios.append({
             "texto": snippet_comentario["textDisplay"],
-            "autor": snippet_comentario["authorDisplayName"],
             "data": snippet_comentario["publishedAt"],
         })
     return lista_comentarios
@@ -52,9 +51,12 @@ def baixar_comentarios(id_video):
 
 # ==== quando roda como script ====
 if __name__ == "__main__":
+    from datetime import datetime
+    
     comentarios = baixar_comentarios("9uadMPZfZc4")
     print("Total:", len(comentarios))
 
+    agora = datetime.now().strftime("%Y-%m-%d_%H-%M")
     tabela = pd.DataFrame(comentarios)
-    tabela.to_csv("dados/comentarios.csv", index=False)
-    print("Salvei", len(tabela), "comentários em dados/comentarios.csv")
+    tabela.to_csv(f"dados/comentarios_{agora}.csv", index=False)
+    print("Salvei", len(tabela), "comentários em dados/comentarios_{agora}.csv")
